@@ -6,7 +6,6 @@
 //  Copyright © 2021 DmitryChaschin. All rights reserved.
 //
 
-
 import UIKit
 
 protocol ContentManagerDelegate {
@@ -21,8 +20,8 @@ struct ContentManager {
     var nextUrl = ""
     var delegate: ContentManagerDelegate?
     
-    func fetch() {
-       let urlString = "\(baseUrl)\(title),\(poster),\(description)&page_size=100"
+    func fetch(page: Int) {
+        let urlString = "\(baseUrl)\(title),\(poster),\(description)&page_size=100&page=\(page)"
         guard let  url = URL(string: urlString) else { return }
         var urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: .infinity)
         urlRequest.httpMethod = "GET"
@@ -41,7 +40,7 @@ struct ContentManager {
         task.resume()
     }
     
-    
+    // add extra arguments to contentModel for next upgrade's
     func parseJSON(from data: Data) -> ContentModel? {
         let decoder = JSONDecoder()
         do {
@@ -56,17 +55,12 @@ struct ContentManager {
                                             poster: poster,
                                             fullDescription: fullDescription,
                                             films: films,pageCounts: count, next: next)
-            
-            print("COUNTS---->PAGE---->\(contentModel.pageCounts)")
             return contentModel
         } catch {
             print(error)
         }
         return nil
     }
-    
-    
-    
     
     //MARK: - Support functions -
     func getImage(_ url_str:String, _ imageView:UIImageView) {
@@ -78,22 +72,17 @@ struct ContentManager {
                 if(image != nil) {
                     DispatchQueue.main.async(execute: {
                         imageView.image = image
-                    imageView.alpha = 0
-                       UIView.animate(withDuration: 1, animations: {
-                          imageView.alpha = 1.0
-                     })
+                        imageView.alpha = 0
+                        UIView.animate(withDuration: 1, animations: {
+                            imageView.alpha = 1.0
+                        })
                     })
                 }
             }
         })
         task.resume()
-        
     }
     
-    
-    func fetchNext(){
-        
-    }
     
 }
 

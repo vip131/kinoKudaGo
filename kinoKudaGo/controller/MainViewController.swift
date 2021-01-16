@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UICollectionViewController , UINavigationControllerDelegate {
     private var contentManager = ContentManager()
     private var results = [Result]()
-    var page: Int = 0
+    var page: Int = 1
     var isPageRefreshing:Bool = false
     var filmCounts: Int = 0
     override func loadView() {
@@ -21,7 +21,7 @@ class MainViewController: UICollectionViewController , UINavigationControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentManager.fetch()
+        contentManager.fetch(page: 1)
     }
 }
 
@@ -60,16 +60,15 @@ extension MainViewController {
         
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        #warning("may cause error")
-//        if (indexPath.row == results.count - 1) && ((results.count / 200) < filmCounts) {
-//            page += 1
-//            print(page)
-//            contentManager.fetchNext()
-//            self.collectionView.reloadData()
-//         
-//       }
-//    }
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        #warning("may cause error")
+       // if (indexPath.row == results.count - 1) && ((results.count / 200) < filmCounts) {
+        if indexPath.row == results.count - 1 {
+            page += 1
+            print(page)
+            contentManager.fetch(page: page)
+       }
+    }
 }
 
 //MARK: - UICollectionViewDelegate -
