@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pvV-YC-zRe">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Movies-->
+        <scene sceneID="hLQ-L7-IGW">
+            <objects>
+                <collectionViewController id="51y-G4-JNg" customClass="MainViewController" customModule="kinoKudaGo" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="HXc-oS-THj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="scrollIndicatorInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NJp-zX-Bf1">
+                            <size key="itemSize" width="150" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Result" id="4K6-Ka-NQd" customClass="ResultCell" customModule="kinoKudaGo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8hb-dp-heL">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IwF-8O-geC">
+                                            <rect key="frame" x="8" y="144" width="134" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="134" id="GwK-72-f8z"/>
+                                                <constraint firstAttribute="height" constant="48" id="kvG-qJ-EQv"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pFh-ib-Zh2">
+                                            <rect key="frame" x="8" y="8" width="134" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="134" id="IND-XE-KdS"/>
+                                                <constraint firstAttribute="height" constant="128" id="mRs-S4-fOl"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="pFh-ib-Zh2" secondAttribute="trailing" constant="8" id="Bx2-wF-TUa"/>
+                                        <constraint firstAttribute="bottom" secondItem="IwF-8O-geC" secondAttribute="bottom" constant="8" id="Uur-n2-K8i"/>
+                                        <constraint firstItem="pFh-ib-Zh2" firstAttribute="top" secondItem="8hb-dp-heL" secondAttribute="top" constant="8" id="hYc-n8-ipT"/>
+                                        <constraint firstItem="IwF-8O-geC" firstAttribute="top" secondItem="pFh-ib-Zh2" secondAttribute="bottom" constant="8" id="jVa-0h-Kvk"/>
+                                        <constraint firstItem="pFh-ib-Zh2" firstAttribute="leading" secondItem="8hb-dp-heL" secondAttribute="leading" constant="8" id="let-ik-Vdn"/>
+                                        <constraint firstItem="IwF-8O-geC" firstAttribute="leading" secondItem="8hb-dp-heL" secondAttribute="leading" constant="8" id="yER-Gv-vOV"/>
+                                        <constraint firstAttribute="trailing" secondItem="IwF-8O-geC" secondAttribute="trailing" constant="8" id="z6j-Ni-kwd"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="pFh-ib-Zh2" id="vzm-iz-fMr"/>
+                                    <outlet property="name" destination="IwF-8O-geC" id="pwh-KB-8Yw"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="51y-G4-JNg" id="Er3-Sj-AjO"/>
+                            <outlet property="delegate" destination="51y-G4-JNg" id="bge-wU-uuu"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Movies" id="N0m-h8-woK"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qH0-JQ-gaY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="576.81159420289862" y="-148.66071428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Asd-tQ-szj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pvV-YC-zRe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mcf-d4-LRb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="51y-G4-JNg" kind="relationship" relationship="rootViewController" id="xtT-WH-d5T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g7E-Le-i0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333.33333333333337" y="-148.66071428571428"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="1id-wt-3bt">
+            <objects>
+                <viewController id="kIH-M8-K0g" customClass="DetailViewController" customModule="kinoKudaGo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="soD-m3-GNs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vh-MY-O51">
+                                <rect key="frame" x="0.0" y="178" width="414" height="684"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3X-sy-xWQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="684"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="l3X-sy-xWQ" secondAttribute="bottom" id="7SD-0R-i9F"/>
+                                    <constraint firstItem="l3X-sy-xWQ" firstAttribute="top" secondItem="1vh-MY-O51" secondAttribute="top" id="9pc-0n-WtF"/>
+                                    <constraint firstItem="l3X-sy-xWQ" firstAttribute="leading" secondItem="1vh-MY-O51" secondAttribute="leading" id="gQk-EN-qeh"/>
+                                    <constraint firstAttribute="trailing" secondItem="l3X-sy-xWQ" secondAttribute="trailing" id="qR8-ji-e7L"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U5d-ql-HYr">
+                                <rect key="frame" x="20" y="44" width="374" height="126"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="Bmb-XF-4lE"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="U5d-ql-HYr" firstAttribute="centerX" secondItem="1vh-MY-O51" secondAttribute="centerX" id="Bjf-1X-QrF"/>
+                            <constraint firstItem="1vh-MY-O51" firstAttribute="trailing" secondItem="gMc-fk-ijK" secondAttribute="trailing" id="Gol-2y-RvB"/>
+                            <constraint firstItem="1vh-MY-O51" firstAttribute="top" secondItem="U5d-ql-HYr" secondAttribute="bottom" constant="8" id="SW0-C7-1ej"/>
+                            <constraint firstItem="1vh-MY-O51" firstAttribute="leading" secondItem="gMc-fk-ijK" secondAttribute="leading" id="aCn-aX-4kg"/>
+                            <constraint firstItem="gMc-fk-ijK" firstAttribute="bottom" secondItem="1vh-MY-O51" secondAttribute="bottom" id="jBi-0j-WUE"/>
+                            <constraint firstItem="U5d-ql-HYr" firstAttribute="leading" secondItem="soD-m3-GNs" secondAttribute="leadingMargin" id="lDl-qB-GJo"/>
+                            <constraint firstItem="U5d-ql-HYr" firstAttribute="top" secondItem="gMc-fk-ijK" secondAttribute="top" id="qPB-RH-Dop"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gMc-fk-ijK"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="U5d-ql-HYr" id="k4I-I0-Aw7"/>
+                        <outlet property="viewForWebView" destination="1vh-MY-O51" id="svt-YK-Bgv"/>
+                        <outlet property="webViewOot" destination="l3X-sy-xWQ" id="rA7-8T-6C6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xD2-XI-cYX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1407" y="-161"/>
+        </scene>
+    </scenes>
+</document>
