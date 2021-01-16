@@ -22,7 +22,7 @@ struct ContentManager {
     var delegate: ContentManagerDelegate?
     
     func fetch() {
-       let urlString = "\(baseUrl)\(title),\(poster),\(description)"
+       let urlString = "\(baseUrl)\(title),\(poster),\(description)&page_size=100"
         guard let  url = URL(string: urlString) else { return }
         var urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: .infinity)
         urlRequest.httpMethod = "GET"
