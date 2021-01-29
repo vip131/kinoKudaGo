@@ -34,11 +34,28 @@ class MainViewController: UICollectionViewController , UINavigationControllerDel
 extension MainViewController: ContentManagerDelegate {
     func didResultsLoaded(contentManager: ContentManager, contentModel: ContentModel) {
         #warning("may cause error")
-        self.results.append(contentsOf: contentModel.films)
+        
         print("RESULT_COUNT->\(results.count)")
 //        self.filmCounts = contentModel.pageCounts
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        
+        if self.results.isEmpty {
+            self.results = contentModel.films
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        } else {
+            self.results.append(contentsOf: contentModel.films)
+            var newPaths = [IndexPath]()
+            
+            var index = self.results.count - contentModel.films.count
+            
+            while index < self.results.count {
+                newPaths.append(IndexPath(item: index, section: 0))
+                index += 1
+            }
+            DispatchQueue.main.async {
+                self.collectionView.insertItems(at: newPaths)
+            }
         }
     }
 }
