@@ -11,36 +11,57 @@ import UIKit
 class MainViewController: UICollectionViewController , UINavigationControllerDelegate {
     private var contentManager = ContentManager()
     private var results = [Result]()
-    var page: Int = 1
-    var isPageRefreshing:Bool = false
-    var filmCounts: Int = 0
-    override func loadView() {
-        super.loadView()
-        contentManager.delegate = self
-    }
+    // не нужно явно указывать типы, swift подхватывает автоматом
+    // filmCounts у тебя не используется, можно удалить
+//    var page: Int = 1
+//    var isPageRefreshing:Bool = false
+//    var filmCounts: Int = 0
     
+    // ТАК:
+    var page = 1
+    var isPageRefreshing = false
+//    var filmCounts = 0
+    
+    // Я бы назначал делегат во viewDidLoad, не вижу смысла делать это в loadView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentManager.delegate = self
         contentManager.fetch(page: 1)
     }
 }
 
 //MARK: - ContentManagerDelegate -
 extension MainViewController: ContentManagerDelegate {
-    func updateUI(_ withManager: ContentManager, _ withModel: ContentModel) {
+    func didResultsLoaded(contentManager: ContentManager, contentModel: ContentModel) {
         #warning("may cause error")
-        self.results.append(contentsOf: withModel.films)
+        
         print("RESULT_COUNT->\(results.count)")
-        self.filmCounts = withModel.pageCounts
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+//        self.filmCounts = contentModel.pageCounts
+        
+        if self.results.isEmpty {
+            self.results = contentModel.films
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        } else {
+            self.results.append(contentsOf: contentModel.films)
+            var newPaths = [IndexPath]()
+            
+            var index = self.results.count - contentModel.films.count
+            
+            while index < self.results.count {
+                newPaths.append(IndexPath(item: index, section: 0))
+                index += 1
+            }
+            DispatchQueue.main.async {
+                self.collectionView.insertItems(at: newPaths)
+            }
         }
     }
 }
 
 //MARK: - UICollectionViewDataSource -
 extension MainViewController {
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return results.count
     }
@@ -49,17 +70,17 @@ extension MainViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Result",
                                                       for: indexPath) as! ResultCell
         let film = results[indexPath.item]
-        cell.name.text = film.title
-        cell.imageView.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
-        cell.imageView.layer.borderWidth = 2
-        cell.imageView.layer.cornerRadius = 10
-        cell.layer.cornerRadius = 10
-        // setUp image for cell
-        contentManager.getImage(film.poster.image, cell.imageView)
-        return cell
         
+        // Лучше выносить в класс ячейки все эти методы, чтобы не раздувать вьюконтроллер
+        cell.configureWithResult(film)
+        
+        // setUp image for cell
+        self.contentManager.setImage(withUrlString: film.poster.image, toImageView: cell.imageView)
+//        contentManager.getImage(film.poster.image, cell.imageView)
+        return cell
     }
     
+    // Это лучше перенести в тот extension где у тебя UICollectionViewDelegate , потому что это метод делегата, а не dataSource
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         #warning("may cause error")
        // if (indexPath.row == results.count - 1) && ((results.count / 200) < filmCounts) {
@@ -73,14 +94,13 @@ extension MainViewController {
 
 //MARK: - UICollectionViewDelegate -
 extension MainViewController {
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let dvc = DetailViewController()
         dvc.film = results[indexPath.item]
         navigationController?.pushViewController(dvc, animated: true)
     }
     
-    
+    // Это лучше перенести рядом к viewDidLoad, это ведь не относится к UICollectionViewDelegate
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }

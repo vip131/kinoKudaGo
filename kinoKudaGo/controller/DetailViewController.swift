@@ -19,6 +19,7 @@ class DetailViewController: UIViewController, WKNavigationDelegate {
         view = webView
         guard let film = film else { return }
         
+        // Так надо оборачивать в такую html обертку?
         let html = """
         <html>
         <head>

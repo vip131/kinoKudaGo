@@ -12,6 +12,13 @@ class ResultCell: UICollectionViewCell {
     @IBOutlet  var imageView: UIImageView!
     @IBOutlet var name : UILabel!
     
+    public func configureWithResult(_ result: Result) {
+        self.name.text = result.title
+        self.imageView.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
+        self.imageView.layer.borderWidth = 2
+        self.imageView.layer.cornerRadius = 10
+        self.layer.cornerRadius = 10
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
